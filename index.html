@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en" class="darkMode">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>2048</title>
+        <script src="main.js" defer></script>
+        <link rel="icon" type="image/x-icon" href="https://imgs.search.brave.com/cmSU6QxBmvDCYiOYM8hSZds9Ik7OC3PAceH6JzbK-bo/rs:fit:500:0:0/g:ce/aHR0cHM6Ly8yMDQ4/Lm5pbmphL2ZpbGVz/Lzc4NTUwMGI2Zjlh/YmI5OTcuODM3MDA5/MzMvMjAucG5n">
+        <link rel="stylesheet" href="style.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    </head>
+    <body>
+        <main>
+            <header>
+                <img
+                    src="https://imgs.search.brave.com/pYrWwaVWntPbt66r9pWLpl4GNk0akZipNjtKurP6SOM/rs:fit:860:0:0/g:ce/aHR0cHM6Ly91cGxv/YWQud2lraW1lZGlh/Lm9yZy93aWtpcGVk/aWEvY29tbW9ucy8x/LzE4LzIwNDhfbG9n/by5zdmc.svg"
+                    alt="2048 game logo"
+                    height="100px"
+                    width="100px"
+                />
+                <button id="play" class="navbarButtons">Play</button>
+                <button id="aboutGame" class="navbarButtons">About Game</button>
+                <button id="rules" class="navbarButtons">Tips</button>
+                <button id="info" class="navbarButtons">About me</button>
+                <button class="navbarButtons" id="modeToggle"><i class="fa-solid fa-sun"></i></button>
+            </header>
+
+            <div id="container">
+                <div id="gameOver">
+                    <h1>Game over</h1>
+                    <h1>Try Again</h1>
+                    <img
+                        src="https://icon-library.com/images/try-again-icon/try-again-icon-9.jpg"
+                        id="gameOverIcon"
+                    />
+                </div>
+
+                <div id="scoresBar">
+                    <div id="currentScore" class="scoreDiv">
+                        <div id="currentScoreKeeper" class="scoreKeeper">0</div>
+                        <div id="currectScoreText">Current Score</div>
+                    </div>
+
+                    <div id="topScore" class="scoreDiv">
+                        <div id="topScoreKeeper" class="scoreKeeper">0</div>
+                        <div id="topScoreText">Top Score</div>
+                    </div>
+                </div>
+
+                <div id="game">
+                    <div id="gameButtons">
+                        <div class="gameButton" id="btn01"></div>
+                        <div class="gameButton" id="btn02"></div>
+                        <div class="gameButton" id="btn03"></div>
+                        <div class="gameButton" id="btn04"></div>
+                        <div class="gameButton" id="btn05"></div>
+                        <div class="gameButton" id="btn06"></div>
+                        <div class="gameButton" id="btn07"></div>
+                        <div class="gameButton" id="btn08"></div>
+                        <div class="gameButton" id="btn09"></div>
+                        <div class="gameButton" id="btn10"></div>
+                        <div class="gameButton" id="btn11"></div>
+                        <div class="gameButton" id="btn12"></div>
+                        <div class="gameButton" id="btn13"></div>
+                        <div class="gameButton" id="btn14"></div>
+                        <div class="gameButton" id="btn15"></div>
+                        <div class="gameButton" id="btn16"></div>
+                    </div>
+                </div>
+
+                <div id="resetArea">
+                    <button id="reset">RESET</button>
+                </div>
+            </div>
+
+            <div id="aboutGameDiv">
+                <h1>About Game</h1>
+
+                <p>
+                    2048 is a single-player sliding tile puzzle video game
+                    written by Italian web developer Gabriele Cirulli and
+                    published on GitHub. The objective of the game is to slide
+                    numbered tiles on a grid to combine them to create a tile
+                    with the number 2048; however, one can continue to play the
+                    game after reaching the goal, creating tiles with larger
+                    numbers. It was originally written in JavaScript and CSS
+                    over a weekend, and released on 9 March 2014 as free and
+                    open-source software subject to the MIT License. Versions
+                    for iOS and Android followed in May 2014.
+                </p>
+                <p>
+                    2048 was intended to be an improved version of two other
+                    games, both of which were clones of the iOS game Threes
+                    released a month earlier. Cirulli himself described 2048 as
+                    being "conceptually similar" to Threes. The release of 2048
+                    resulted in the rapid appearance of many similar games, akin
+                    to the flood of Flappy Bird variations from 2013. The game
+                    received generally positive reviews from critics, with it
+                    being described as "viral" and "addictive".
+                </p>
+            </div>
+
+            <div id="rulesDiv">
+                <div id="infoDiv">
+                    <h1>2048 Game Tips & Tricks</h1>
+                    <h4>1. Take It Slow</h4>
+                    <p>
+                        2048 is so easy to play, you might get into the habit of
+                        tearing through games without even really paying
+                        attention to what you're doing. That's not a good idea.
+                        Take your time - there's no penalty for thinking your
+                        moves through after all. Also, try to predict where new
+                        blocks might come in and how you could deploy them.
+                        Something like playing chess
+                    </p>
+                    <h4>2. Work The Corners</h4>
+                    <p>
+                        In order to win the game you should have a specific
+                        strategy. If you do not have one, you will most probaly
+                        not reach furthr than 512. So, a good strategy is to
+                        always keep your hiest value tile at one of the corners.
+                        Just chooose one corner and direct all your tiles there.
+                        It is not as easy as it sounds, but you can master it
+                        quickly. In order to stop the highest value tile to
+                        leave "the king's place", try to pack tiles around it.
+                        Preferably, they should be the other biggest tiles.
+                        Master this simple strategy and you will soon reach 1024
+                        and even win the 2048 Game!
+                    </p>
+                    <h4>
+                        How to make the highest valued tile in the right bottom
+                        corner and not to move it?
+                    </h4>
+                    <p>
+                        Once you have placed your highest tile value is in the
+                        right bottom corner, do not move it. To make sure it is
+                        not moved, you have to make the last row always filled
+                        by pushing the down arrow so that the use of LEFT and
+                        Right Arrow would not move the highest valued tile.
+                        Basically, this is the most important cheat for 2048
+                        Game - keep the highest tile in the corner and do not
+                        move it.
+                    </p>
+                </div>
+            </div>
+
+            <div id="aboutMeDiv">
+                <div id="aboutMeContainer">
+                    <h1>About me</h1>
+
+                    <p>
+                        Lorem, ipsum dolor sit amet consectetur adipisicing
+                        elit. Aliquam, optio sit laborum accusamus blanditiis
+                        eaque libero rerum molestias nulla. Ducimus dolorem
+                        voluptatem quaerat fugiat eligendi, eum officia impedit
+                        sunt voluptatum?
+                    </p>
+
+                    <h3>Socials</h3>
+                    
+                    <a href="https://www.linkedin.com/in/aman-krishnarth-577138295/" target="_blank">
+                        <img
+                            src="https://imgs.search.brave.com/uGDtHsxME6trYi3Pg1IQoYBs0ZNStLg4fOwcz9gYrwo/rs:fit:860:0:0/g:ce/aHR0cHM6Ly91cGxv/YWQud2lraW1lZGlh/Lm9yZy93aWtpcGVk/aWEvY29tbW9ucy9j/L2NhL0xpbmtlZElu/X2xvZ29faW5pdGlh/bHMucG5n"
+                            alt=""
+                            height="100px"
+                            width="100px"
+                        />
+                    </a>
+
+                    <a href="https://github.com/Aman-Krishnarth" target="_blank">
+                        <img
+                            src="https://imgs.search.brave.com/uP_AXwDlduVSD7yHigFcNnh6RHtGrwEV9jPYMurixRA/rs:fit:860:0:0/g:ce/aHR0cHM6Ly93d3cu/bG9nby53aW5lL2Ev/bG9nby9HaXRIdWIv/R2l0SHViLUxvZ28u/d2luZS5zdmc.svg"
+                            alt=""
+                            height="100px"
+                            width="100px"
+                        />
+                    </a>
+                </div>
+            </div>
+        </main>
+    </body>
+</html>

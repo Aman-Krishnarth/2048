@@ -1,0 +1,250 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+html,body{
+    height: 100vh;
+    width: 100vw;
+    background-color: #212121;
+    color: black;
+    font-size: 1.1rem;
+}
+
+main{
+    height: 100%;
+    display: grid;
+    grid-template-rows: auto 1fr;
+}
+
+header{
+   
+    padding: 0.5rem;
+    display: flex;
+    justify-content: space-around;
+}
+
+
+#scoresBar{
+    display: flex;
+    justify-content: space-around;
+}
+
+#game{
+    /* background-color: brown; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+}
+
+#gameButtons{
+    /* background-color: blue; */
+    height: 100%;
+    width: 60%;
+    display: grid;
+    grid-template-rows: 1fr 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: 3px;
+}
+
+#resetArea{
+    background-color:#2f2762;
+    text-align: center;
+    margin-top: 10px;
+    padding: 10px;
+}
+
+.gameButton{
+    border-radius: 10px;
+    background-color: rgb(66, 102, 221);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 3rem;
+    font-weight: bolder;  
+}
+
+.buttonActivated{
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+}
+
+#reset{
+    background: linear-gradient(302.53deg,#4c54d2 0%,#bf14a2 56.25%,#f73a1c 100%);
+    border: none;
+    padding: 1rem;
+    font-size: 1rem;
+    letter-spacing: 10px;
+    border-radius: 10px;
+    font-weight: bolder;
+
+    
+}
+
+.scoreDiv{
+    /* background-color: red; */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+}
+
+#container{
+    position: relative;
+    z-index: 1;
+    background-color: rgb(73, 82, 118);
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+}
+
+#gameOver{
+    height: 100%;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.518);
+    position: absolute;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    font-size: 2rem;
+    gap: 2rem;
+
+}
+
+#gameOverIcon{
+    height: 10rem;
+    width: 10rem;
+}
+
+#rulesDiv{
+    display: none;
+    background-color: rgb(125, 101, 55);
+    justify-content: center;
+}
+
+#infoDiv{
+    width: 65%;
+}
+
+#infoDiv h1{
+    margin-top: 1.5rem;
+    text-align: center;
+}
+
+#infoDiv h4{
+    margin-top: 2rem;
+}
+
+#aboutMeDiv{
+    display: none;
+}
+
+
+
+.activeButton{
+    /* background-color: green; */
+    transition: all;
+    transition-duration: 0.15s;
+    transition-timing-function: linear;
+}
+
+#currentScore{
+    background-color: blue;
+    display: grid;
+    grid-template-rows: repeat(2,1fr);
+}
+
+#currentScoreKeeper{
+    background-color: red;
+}
+
+#currectScoreText{
+    background-color: rgb(42, 134, 87);
+}
+
+
+#topScore{
+    /* background-color: blue; */
+    /* display: grid;
+    grid-template-rows: repeat(2,1fr); */
+
+}
+
+#topScoreKeeper{
+    background-color: red;
+
+}
+
+#topScoreText{
+    background-color: rgb(42, 134, 87);
+}
+
+#aboutGameDiv{
+    display: none;
+}
+
+.navbarButtons{
+    background-color: gray;
+    padding: 1rem;
+    border: none;
+    font-size: 1.5rem;
+    font-weight: bolder;
+    border-radius: 10px;
+}
+
+.navbarButtons:hover{
+    transition-property: padding;
+    transition-duration: 0.1s;
+    transition-timing-function: linear;
+    padding: 1.5rem;
+}
+
+#aboutGameDiv{
+    background-color: rgb(125, 101, 55);
+    text-align: center;
+    display: none;
+    flex-direction: column;
+    align-items: center;
+
+}
+
+#aboutGameDiv p{
+    /* background-color: blue; */
+    margin-top: 1.5rem;
+    width: 60%;
+
+}
+
+#aboutGameDiv h1{
+    margin-top: 3rem;
+}
+
+#aboutMeDiv{
+    background-color: rgb(125, 101, 55);
+    justify-content: center;
+    
+}
+
+#aboutMeContainer{
+    /* background-color: blue; */
+    width: 65%;
+}
+
+#aboutMeContainer h1{
+    
+    text-align: center;
+    margin-bottom: 1rem;
+    margin-top:1rem;
+}
+
+#aboutMeContainer h3{
+    margin-top: 1rem;
+    margin-bottom: 0.4rem;
+}
+
+.modeToggle{
+    background: rgb(234, 158, 158);
+}
