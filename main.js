@@ -76,11 +76,15 @@ function addRandomValue() {
         return value.textContent === "";
     });
 
-    let randomIndex = Math.round(Math.random() * 100) % availableButtons.length;
+    if(availableButtons.length>0){
 
-    let randomValue = Math.round(Math.random() * 10) % 2;
+        let randomIndex = Math.round(Math.random() * 100) % availableButtons.length;
+    
+        let randomValue = Math.round(Math.random() * 10) % 2;
+    
+        availableButtons[randomIndex].textContent = "" + choices[randomValue];
+    }
 
-    availableButtons[randomIndex].textContent = "" + choices[randomValue];
     addClasses();
     addColors();
 }
@@ -96,11 +100,15 @@ function addColors() {
 
 // moving values
 
+let anyMoveLeft;
+let anyMoveRight ;
+let anyMoveDown ;
+let anyMoveUp ;
+let anyMerge = false;
+
 function moveValues(e) {
     let valuesInRow = [];
-    let anyMerge = false;
-    let anyMove = false;
-
+    
     if (e.keyCode === 37) {
         // left key
         let j = 15;
@@ -115,7 +123,7 @@ function moveValues(e) {
                         if (buttons[j].textContent === lastValue) {
                             lastValue = "";
                             anyMerge = true;
-                            anyMove = true;
+                            anyMoveLeft = true;
                             valuesInRow.push("" + +buttons[j].textContent * 2);
                         } else {
                             valuesInRow.push("" + +lastValue);
@@ -141,6 +149,9 @@ function moveValues(e) {
         if (anyMerge) {
             currentScore.textContent = "" + (+currentScore.textContent + 10);
         }
+        else{
+            anyMoveLeft = false;
+        }
         addRandomValue();
         addClasses();
     } else if (e.keyCode === 39) {
@@ -157,7 +168,7 @@ function moveValues(e) {
                         if (buttons[j].textContent === lastValue) {
                             lastValue = "";
                             anyMerge = true;
-                            anyMove = true;
+                            anyMoveRight = true;
                             valuesInRow.push("" + +buttons[j].textContent * 2);
                         } else {
                             valuesInRow.push("" + +lastValue);
@@ -183,6 +194,9 @@ function moveValues(e) {
         if (anyMerge) {
             currentScore.textContent = "" + (+currentScore.textContent + 10);
         }
+        else{
+            anyMoveRight = false;
+        }
         addRandomValue();
         addClasses();
     } else if (e.keyCode === 38) {
@@ -197,7 +211,7 @@ function moveValues(e) {
                         if (buttons[j].textContent === lastValue) {
                             lastValue = "";
                             anyMerge = true;
-                            anyMove = true;
+                            anyMoveUp = true;
                             valuesInRow.push("" + +buttons[j].textContent * 2);
                         } else {
                             valuesInRow.push("" + +lastValue);
@@ -223,6 +237,9 @@ function moveValues(e) {
         if (anyMerge) {
             currentScore.textContent = "" + (+currentScore.textContent + 10);
         }
+        else{
+            anyMoveUp = false;
+        }
         addRandomValue();
         addClasses();
     } else if (e.keyCode === 40) {
@@ -237,7 +254,7 @@ function moveValues(e) {
                         if (buttons[j].textContent === lastValue) {
                             lastValue = "";
                             anyMerge = true;
-                            anyMove = true;
+                            anyMoveDown = true;
                             valuesInRow.push("" + +buttons[j].textContent * 2);
                         } else {
                             valuesInRow.push("" + +lastValue);
@@ -253,7 +270,6 @@ function moveValues(e) {
             }
             // adding values in row
 
-            // console.log(`values to be added = ${valuesInRow} i = ${i}`)
             for (let col = 12 + (i % 4); col >= i; col -= 4) {
                 if (valuesInRow.length > 0) {
                     buttons[col].textContent = "" + valuesInRow.pop();
@@ -265,19 +281,36 @@ function moveValues(e) {
         if (anyMerge) {
             currentScore.textContent = "" + (+currentScore.textContent + 10);
         }
+        else{
+            anyMoveDown = false;
+        }
         addRandomValue();
         addClasses();
     }
 
-    if (!anyMove) {
-        let anySpaceLeft = arrayButtons.some((value) => {
-            return value.textContent === "";
-        });
-        if (!anySpaceLeft) {
-            gameOverDiv.style.display = "flex";
-            disableButtons();
+    if(anyMerge){
+        anyMoveLeft = undefined;
+        anyMoveRight = undefined;
+        anyMoveDown = undefined;
+        anyMoveUp = undefined;
+        anyMerge = false;
+
+    }
+    else{
+        if (!anyMoveLeft && !anyMoveDown && !anyMoveRight && !anyMoveUp && 
+            anyMoveLeft!==undefined && anyMoveDown!==undefined && anyMoveRight!==undefined && anyMoveUp!==undefined) {
+                console.log("game over waale ke if mein")
+            let anySpaceLeft = arrayButtons.some((value) => {
+                return value.textContent === "";
+            });
+            if (!anySpaceLeft) {
+                console.log("idhar se display laga raha hu")
+                gameOverDiv.style.display = "flex";
+                disableButtons();
+            }
         }
     }
+
 
     addColors();
 }
