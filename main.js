@@ -67,7 +67,7 @@ function disableButtons() {
     document.removeEventListener("keydown", moveValues);
 }
 
-let choices = [2, 4, 8];
+let choices = [2, 4];
 
 //random no. generating
 
@@ -78,7 +78,7 @@ function addRandomValue() {
 
     let randomIndex = Math.round(Math.random() * 100) % availableButtons.length;
 
-    let randomValue = Math.round(Math.random() * 10) % 3;
+    let randomValue = Math.round(Math.random() * 10) % 2;
 
     availableButtons[randomIndex].textContent = "" + choices[randomValue];
     addClasses();
