@@ -100,26 +100,34 @@ function addColors() {
 
 // moving values
 
-let anyMoveLeft;
-let anyMoveRight;
-let anyMoveDown;
-let anyMoveUp;
+function possibleMerges() {
+    let index = 0;
 
-
-function possibleMerges(){
-
-    for(let outerLoop = 0; outerLoop<3;outerLoop++){
-
-        for(index = 0;index<3;index++){
-            if(arrayButtons[index].textContent!==""){
-                if(arrayButtons[index].textContent===arrayButtons[index+1].textContent || arrayButtons[index].textContent===arrayButtons[index+4].textContent){
+    for (let row = 0; row < 16; row++) {
+        if (arrayButtons[index].textContent !== "") {
+            //right check
+            if (index % 4 !== 3) {
+                if (
+                    arrayButtons[index].textContent ===
+                    arrayButtons[index + 1].textContent
+                ) {
+                    return true;
+                }
+            }
+            //down check
+            if (index + 4 < 16) {
+                if (
+                    arrayButtons[index].textContent ===
+                    arrayButtons[index + 4].textContent
+                ) {
                     return true;
                 }
             }
         }
+        index++;
     }
-    return false;
 
+    return false;
 }
 
 function moveValues(e) {
@@ -140,7 +148,6 @@ function moveValues(e) {
                         if (buttons[j].textContent === lastValue) {
                             lastValue = "";
                             anyMerge = true;
-                            anyMoveLeft = true;
                             valuesInRow.push("" + +buttons[j].textContent * 2);
                         } else {
                             valuesInRow.push("" + +lastValue);
@@ -163,35 +170,7 @@ function moveValues(e) {
                 }
             }
         }
-
-        let anySpaceLeft = arrayButtons.some((value) => {
-            return value.textContent === "";
-        });
-
-        if (anyMerge) {
-            addRandomValue();
-        }
-        else{
-            if(anySpaceLeft){
-                addRandomValue();
-            }
-            else{
-                let gameWillContinue = possibleMerges();
-                if(gameWillContinue){
-                    console.log("U still have possible merges")
-                }
-                else{
-                    gameOverDiv.style.display = "flex";
-                disableButtons();
-
-                }
-            }
-
-        }
-
-
-        // addRandomValue();
-        addClasses();
+        
     } else if (e.keyCode === 39) {
         // right key
         let j = 0;
@@ -206,7 +185,6 @@ function moveValues(e) {
                         if (buttons[j].textContent === lastValue) {
                             lastValue = "";
                             anyMerge = true;
-                            anyMoveRight = true;
                             valuesInRow.push("" + +buttons[j].textContent * 2);
                         } else {
                             valuesInRow.push("" + +lastValue);
@@ -229,34 +207,8 @@ function moveValues(e) {
                 }
             }
         }
-        
-        let anySpaceLeft = arrayButtons.some((value) => {
-            return value.textContent === "";
-        });
-
-        if (anyMerge) {
-            addRandomValue();
-        }
-        else{
-            if(anySpaceLeft){
-                addRandomValue();
-            }
-            else{
-                let gameWillContinue = possibleMerges();
-                if(gameWillContinue){
-                    console.log("U still have possible merges")
-                }
-                else{
-                    gameOverDiv.style.display = "flex";
-                disableButtons();
-
-                }
-            }
-
-        }
-
         // addRandomValue();
-        addClasses();
+        // addClasses();
     } else if (e.keyCode === 38) {
         // key up
         let lastValue = "";
@@ -269,7 +221,6 @@ function moveValues(e) {
                         if (buttons[j].textContent === lastValue) {
                             lastValue = "";
                             anyMerge = true;
-                            anyMoveUp = true;
                             valuesInRow.push("" + +buttons[j].textContent * 2);
                         } else {
                             valuesInRow.push("" + +lastValue);
@@ -292,33 +243,8 @@ function moveValues(e) {
                 }
             }
         }
-        let anySpaceLeft = arrayButtons.some((value) => {
-            return value.textContent === "";
-        });
-
-        if (anyMerge) {
-            addRandomValue();
-        }
-        else{
-            if(anySpaceLeft){
-                addRandomValue();
-            }
-            else{
-                let gameWillContinue = possibleMerges();
-                if(gameWillContinue){
-                    console.log("U still have possible merges")
-                }
-                else{
-                    gameOverDiv.style.display = "flex";
-                disableButtons();
-
-                }
-            }
-
-        }
         // addRandomValue();
-        addClasses();
-
+        // addClasses();
     } else if (e.keyCode === 40) {
         // down key
         let lastValue = "";
@@ -331,7 +257,6 @@ function moveValues(e) {
                         if (buttons[j].textContent === lastValue) {
                             lastValue = "";
                             anyMerge = true;
-                            anyMoveDown = true;
                             valuesInRow.push("" + +buttons[j].textContent * 2);
                         } else {
                             valuesInRow.push("" + +lastValue);
@@ -355,58 +280,74 @@ function moveValues(e) {
                 }
             }
         }
-        let anySpaceLeft = arrayButtons.some((value) => {
-            return value.textContent === "";
-        });
-
-        if (anyMerge) {
-            addRandomValue();
-        }
-        else{
-            if(anySpaceLeft){
-                addRandomValue();
-            }
-            else{
-                let gameWillContinue = possibleMerges();
-                if(gameWillContinue){
-                    console.log("U still have possible merges")
-                }
-                else{
-                    gameOverDiv.style.display = "flex";
-                disableButtons();
-
-                }
-            }
-
-        }
         // addRandomValue();
-        addClasses();
+        // addClasses();
     }
 
-    // if(anyMerge){
-    //     anyMoveLeft = undefined;
-    //     anyMoveRight = undefined;
-    //     anyMoveDown = undefined;
-    //     anyMoveUp = undefined;
-    //     anyMerge = false;
+    if (
+        e.keyCode == 37 ||
+        e.keyCode == 38 ||
+        e.keyCode == 39 ||
+        e.keyCode == 40
+    ) {
+        if (anyMerge) {
 
-    // }
-    // else{
-    //     if (!anyMoveLeft && !anyMoveDown && !anyMoveRight && !anyMoveUp &&
-    //         anyMoveLeft!==undefined && anyMoveDown!==undefined && anyMoveRight!==undefined && anyMoveUp!==undefined) {
-    //             console.log("game over waale ke if mein")
-    //         let anySpaceLeft = arrayButtons.some((value) => {
-    //             return value.textContent === "";
-    //         });
-    //         if (!anySpaceLeft) {
-    //             console.log("idhar se display laga raha hu")
-    //             gameOverDiv.style.display = "flex";
-    //             disableButtons();
-    //         }
-    //     }
-    // }
+            currentScore.textContent = ""+(+currentScore.textContent + 10);
+            addRandomValue();
+            addClasses();
 
-    addColors();
+            function checkingTextContent(button) {
+                return button.textContent === "";
+            }
+
+            let ret = arrayButtons.some(checkingTextContent);
+
+            if (!ret) {
+                let anyPossibleMerge = possibleMerges();
+
+                if (!anyPossibleMerge) {
+                    gameOverDiv.style.display = "flex";
+                    disableButtons();
+                }
+            }
+        } else {
+            function checkingTextContent(button) {
+                return button.textContent === "";
+            }
+
+            let ret = arrayButtons.some(checkingTextContent);
+
+            if (ret) {
+                //jagah khaali hai
+                addRandomValue();
+                addClasses();
+                function checkingTextContent(button) {
+                    return button.textContent === "";
+                }
+
+                let InnerRet = arrayButtons.some(checkingTextContent);
+
+                if (!InnerRet) {
+                    let anyPossibleMerge = possibleMerges();
+
+                    if (!anyPossibleMerge) {
+                        gameOverDiv.style.display = "flex";
+                        disableButtons();
+                    }
+                }
+            } else {
+                // jagah khaali nai hai
+                let anyPossibleMerge = possibleMerges();
+
+                if (!anyPossibleMerge) {
+                    gameOverDiv.style.display = "flex";
+                    disableButtons();
+                }
+            }
+        }
+
+        addColors();
+    }
 }
 
 document.addEventListener("keydown", moveValues);
