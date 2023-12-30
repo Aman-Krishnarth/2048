@@ -76,12 +76,12 @@ function addRandomValue() {
         return value.textContent === "";
     });
 
-    if(availableButtons.length>0){
+    if (availableButtons.length > 0) {
+        let randomIndex =
+            Math.round(Math.random() * 100) % availableButtons.length;
 
-        let randomIndex = Math.round(Math.random() * 100) % availableButtons.length;
-    
         let randomValue = Math.round(Math.random() * 10) % 2;
-    
+
         availableButtons[randomIndex].textContent = "" + choices[randomValue];
     }
 
@@ -101,14 +101,31 @@ function addColors() {
 // moving values
 
 let anyMoveLeft;
-let anyMoveRight ;
-let anyMoveDown ;
-let anyMoveUp ;
-let anyMerge = false;
+let anyMoveRight;
+let anyMoveDown;
+let anyMoveUp;
+
+
+function possibleMerges(){
+
+    for(let outerLoop = 0; outerLoop<3;outerLoop++){
+
+        for(index = 0;index<3;index++){
+            if(arrayButtons[index].textContent!==""){
+                if(arrayButtons[index].textContent===arrayButtons[index+1].textContent || arrayButtons[index].textContent===arrayButtons[index+4].textContent){
+                    return true;
+                }
+            }
+        }
+    }
+    return false;
+
+}
 
 function moveValues(e) {
+    let anyMerge = false;
     let valuesInRow = [];
-    
+
     if (e.keyCode === 37) {
         // left key
         let j = 15;
@@ -146,13 +163,34 @@ function moveValues(e) {
                 }
             }
         }
+
+        let anySpaceLeft = arrayButtons.some((value) => {
+            return value.textContent === "";
+        });
+
         if (anyMerge) {
-            currentScore.textContent = "" + (+currentScore.textContent + 10);
+            addRandomValue();
         }
         else{
-            anyMoveLeft = false;
+            if(anySpaceLeft){
+                addRandomValue();
+            }
+            else{
+                let gameWillContinue = possibleMerges();
+                if(gameWillContinue){
+                    console.log("U still have possible merges")
+                }
+                else{
+                    gameOverDiv.style.display = "flex";
+                disableButtons();
+
+                }
+            }
+
         }
-        addRandomValue();
+
+
+        // addRandomValue();
         addClasses();
     } else if (e.keyCode === 39) {
         // right key
@@ -191,13 +229,33 @@ function moveValues(e) {
                 }
             }
         }
+        
+        let anySpaceLeft = arrayButtons.some((value) => {
+            return value.textContent === "";
+        });
+
         if (anyMerge) {
-            currentScore.textContent = "" + (+currentScore.textContent + 10);
+            addRandomValue();
         }
         else{
-            anyMoveRight = false;
+            if(anySpaceLeft){
+                addRandomValue();
+            }
+            else{
+                let gameWillContinue = possibleMerges();
+                if(gameWillContinue){
+                    console.log("U still have possible merges")
+                }
+                else{
+                    gameOverDiv.style.display = "flex";
+                disableButtons();
+
+                }
+            }
+
         }
-        addRandomValue();
+
+        // addRandomValue();
         addClasses();
     } else if (e.keyCode === 38) {
         // key up
@@ -234,14 +292,33 @@ function moveValues(e) {
                 }
             }
         }
+        let anySpaceLeft = arrayButtons.some((value) => {
+            return value.textContent === "";
+        });
+
         if (anyMerge) {
-            currentScore.textContent = "" + (+currentScore.textContent + 10);
+            addRandomValue();
         }
         else{
-            anyMoveUp = false;
+            if(anySpaceLeft){
+                addRandomValue();
+            }
+            else{
+                let gameWillContinue = possibleMerges();
+                if(gameWillContinue){
+                    console.log("U still have possible merges")
+                }
+                else{
+                    gameOverDiv.style.display = "flex";
+                disableButtons();
+
+                }
+            }
+
         }
-        addRandomValue();
+        // addRandomValue();
         addClasses();
+
     } else if (e.keyCode === 40) {
         // down key
         let lastValue = "";
@@ -278,39 +355,56 @@ function moveValues(e) {
                 }
             }
         }
+        let anySpaceLeft = arrayButtons.some((value) => {
+            return value.textContent === "";
+        });
+
         if (anyMerge) {
-            currentScore.textContent = "" + (+currentScore.textContent + 10);
+            addRandomValue();
         }
         else{
-            anyMoveDown = false;
+            if(anySpaceLeft){
+                addRandomValue();
+            }
+            else{
+                let gameWillContinue = possibleMerges();
+                if(gameWillContinue){
+                    console.log("U still have possible merges")
+                }
+                else{
+                    gameOverDiv.style.display = "flex";
+                disableButtons();
+
+                }
+            }
+
         }
-        addRandomValue();
+        // addRandomValue();
         addClasses();
     }
 
-    if(anyMerge){
-        anyMoveLeft = undefined;
-        anyMoveRight = undefined;
-        anyMoveDown = undefined;
-        anyMoveUp = undefined;
-        anyMerge = false;
+    // if(anyMerge){
+    //     anyMoveLeft = undefined;
+    //     anyMoveRight = undefined;
+    //     anyMoveDown = undefined;
+    //     anyMoveUp = undefined;
+    //     anyMerge = false;
 
-    }
-    else{
-        if (!anyMoveLeft && !anyMoveDown && !anyMoveRight && !anyMoveUp && 
-            anyMoveLeft!==undefined && anyMoveDown!==undefined && anyMoveRight!==undefined && anyMoveUp!==undefined) {
-                console.log("game over waale ke if mein")
-            let anySpaceLeft = arrayButtons.some((value) => {
-                return value.textContent === "";
-            });
-            if (!anySpaceLeft) {
-                console.log("idhar se display laga raha hu")
-                gameOverDiv.style.display = "flex";
-                disableButtons();
-            }
-        }
-    }
-
+    // }
+    // else{
+    //     if (!anyMoveLeft && !anyMoveDown && !anyMoveRight && !anyMoveUp &&
+    //         anyMoveLeft!==undefined && anyMoveDown!==undefined && anyMoveRight!==undefined && anyMoveUp!==undefined) {
+    //             console.log("game over waale ke if mein")
+    //         let anySpaceLeft = arrayButtons.some((value) => {
+    //             return value.textContent === "";
+    //         });
+    //         if (!anySpaceLeft) {
+    //             console.log("idhar se display laga raha hu")
+    //             gameOverDiv.style.display = "flex";
+    //             disableButtons();
+    //         }
+    //     }
+    // }
 
     addColors();
 }
